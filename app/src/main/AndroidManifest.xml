@@ -24,6 +24,7 @@
                 android:name="android.support.PARENTACTIVIT"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".ScanActivity"/>
     </application>
 
 </manifest>
