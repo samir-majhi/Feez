@@ -1,4 +1,6 @@
 package com.example.samir.feez;
+
+import java.util.ArrayList;
 import java.util.Date;
 /**
  * Created by samir on 9/3/18.
@@ -12,7 +14,7 @@ public class StudentInfo {
       String phoneNumber;
       String batch;
 
-      static StudentInfo[] instance;
+      private static ArrayList<StudentInfo> instance = new ArrayList<StudentInfo>();
 
       StudentInfo(String name, Date joiningDate, String phoneNumber, String batch){
             lastGeneratedID++;
@@ -23,30 +25,37 @@ public class StudentInfo {
             this.batch = batch;
       }
 
-      static StudentInfo[] getInstance(){
+      static ArrayList<StudentInfo> getInstance(){
             //TEMP stub for dummy data creation
-            if (instance == null) {
+            if (instance.isEmpty()) {
                 createDummyData();
             }
             return instance;
       }
 
       static void createDummyData(){
-            instance = new StudentInfo[]{ new StudentInfo("Amit",new Date(), "1234567891","1"),
-                         new StudentInfo("Bindra",new Date(), "1234567892","2"),
-                         new StudentInfo("Cassandra",new Date(), "1234567893","3")};
+          Date date = new Date();
+          instance.add(new StudentInfo("Amit", date, "1234567891","1"));
+          instance.add(new StudentInfo("Bindra", date, "1234567892","2"));
+          instance.add(new StudentInfo("Cassandra", date, "1234567893","3"));
       }
 
       // TODO: Implement this class as a hash table for faster getting of name from id.
       // Might not be required since we currently don't expect student name to be huge.
       // Given that our customers are solopreneurs
+
       static String getStudentNameByID (long ID){
-          StudentInfo[] tempInstance = getInstance();
+          ArrayList<StudentInfo> tempInstance = getInstance();
           for (StudentInfo student : tempInstance){
               if (student.ID == ID) {
                   return student.name;
               }
           }
           return null;
+      }
+
+      static void addStudent(String name, Date joiningDate, String phoneNumber, String batch){
+          StudentInfo student = new StudentInfo(name, joiningDate, phoneNumber, batch);
+          instance.add(student);
       }
 }

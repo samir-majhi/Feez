@@ -37,7 +37,7 @@ public class FeeRegister {
     static void createDummyData(){
         Date date = new Date();
         instance = new FeeRegister[]{new FeeRegister(1, date, date, 100, true),
-                    new FeeRegister(2, date, date, 200, true),
+                    new FeeRegister(2, date, date, 200, false),
                     new FeeRegister(3, date, date, 300, true)};
     }
 }
