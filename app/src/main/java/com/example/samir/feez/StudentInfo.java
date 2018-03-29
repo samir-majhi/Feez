@@ -57,5 +57,6 @@ public class StudentInfo {
       static void addStudent(String name, Date joiningDate, String phoneNumber, String batch){
           StudentInfo student = new StudentInfo(name, joiningDate, phoneNumber, batch);
           instance.add(student);
+          FeeRegister.addFeeEntry(student.ID, joiningDate, null, 0, false );
       }
 }

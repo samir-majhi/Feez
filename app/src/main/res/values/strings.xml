@@ -4,4 +4,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_add_student">AddStudentActivity</string>
+    <string name="phoneNumberHint">Student or parent phone number</string>
 </resources>

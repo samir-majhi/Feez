@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -11,17 +12,22 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class DisplayFeeRegisterActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class DisplayFeeRegisterActivity extends AppCompatActivity {
+    static int count = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Learning Android. Show text from MainActivity
+    }
+
+    @Override
+    protected void onStart() {
+        Log.d("DisplayFeeRegisterActivity","onResume call number" + count);
+        count++;
+        super.onStart();
         setContentView(R.layout.activity_display_fee_register);
         Intent intent = getIntent();
-        //String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        //TextView textView = findViewById(R.id.textView);
-        //textView.setText(message);
 
         TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams
                 (TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
@@ -35,7 +41,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity {
 
         Context context = DisplayFeeRegisterActivity.this;
 
-        FeeRegister feeRegister[] = FeeRegister.getInstance();
+        ArrayList<FeeRegister> feeRegister = FeeRegister.getInstance();
         for (FeeRegister feeDetail : feeRegister){
 
             TableRow tableRow = new TableRow(context);
@@ -62,5 +68,5 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddStudentActivity.class);
         startActivity(intent);
     }
-    // TODO: Implement Checkbox click activity
+    // TODO: Implement Checkbox click behaviour
 }

@@ -9,8 +9,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static android.graphics.Color.RED;
-
 public class AddStudentActivity extends AppCompatActivity {
 
     @Override
@@ -36,7 +34,7 @@ public class AddStudentActivity extends AppCompatActivity {
         }
         catch (ParseException e){
             //invalid date format
-            showInvalidDateFormatMessage();
+            JoiningDateEntry.setError("Invalid Date Format. Please use dd-MM-YYYY");
             return;
         }
 
@@ -47,24 +45,8 @@ public class AddStudentActivity extends AppCompatActivity {
         String batch = BatchEntry.getText().toString();
 
         StudentInfo.addStudent(name, joiningDate, phoneNumber, batch);
+        finish();
     }
 
-    private void showInvalidDateFormatMessage(){
-        EditText JoiningDateEntry = (EditText) findViewById(R.id.JoiningDateEntry);
-        String joiningDateString = JoiningDateEntry.getText().toString();
-        int currentColor = JoiningDateEntry.getCurrentTextColor();
-        //show error message for sometime
-        JoiningDateEntry.setTextColor(RED);
-        JoiningDateEntry.setText("Invalid Date Format. Please use dd-MM-YYYY");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        //restore date entered
-        JoiningDateEntry.setTextColor(currentColor);
-        JoiningDateEntry.setText(joiningDateString);
-    }
     // TODO: Input validation
 }
