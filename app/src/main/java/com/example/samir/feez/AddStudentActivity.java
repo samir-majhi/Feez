@@ -27,14 +27,14 @@ public class AddStudentActivity extends AppCompatActivity {
 
         EditText JoiningDateEntry = (EditText) findViewById(R.id.JoiningDateEntry);
         String joiningDateString = JoiningDateEntry.getText().toString();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date joiningDate;
         try {
             joiningDate = sdf.parse(joiningDateString);
         }
         catch (ParseException e){
             //invalid date format
-            JoiningDateEntry.setError("Invalid Date Format. Please use dd-MM-YYYY");
+            JoiningDateEntry.setError("Invalid Date Format. Please use dd-MM-yyyy");
             return;
         }
 

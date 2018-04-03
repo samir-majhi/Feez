@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Spinner
+            android:id="@+id/monthFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textColor="#FFFFFF"/>
+
         <TableLayout
             android:id="@+id/FeeTable"
             android:layout_width="wrap_content"

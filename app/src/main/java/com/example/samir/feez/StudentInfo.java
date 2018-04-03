@@ -34,10 +34,12 @@ public class StudentInfo {
       }
 
       static void createDummyData(){
-          Date date = new Date();
-          instance.add(new StudentInfo("Amit", date, "1234567891","1"));
-          instance.add(new StudentInfo("Bindra", date, "1234567892","2"));
-          instance.add(new StudentInfo("Cassandra", date, "1234567893","3"));
+          Date date1 = new Date(2017-1900, 1-1,1);
+          Date date2 = new Date(2018-1900, 4-1,1);
+          Date date3 = new Date(2018-1900, 3-1,1);
+          instance.add(new StudentInfo("Amit Jan 2017", date1, "1234567891","1"));
+          instance.add(new StudentInfo("Bindra March and Apr 2018", date2, "1234567892","2"));
+          instance.add(new StudentInfo("Cassandra", date3, "1234567893","3"));
       }
 
       // TODO: Implement this class as a hash table for faster getting of name from id.
@@ -45,8 +47,8 @@ public class StudentInfo {
       // Given that our customers are solopreneurs
 
       static String getStudentNameByID (long ID){
-          ArrayList<StudentInfo> tempInstance = getInstance();
-          for (StudentInfo student : tempInstance){
+          getInstance();
+          for (StudentInfo student : instance){
               if (student.ID == ID) {
                   return student.name;
               }
@@ -57,6 +59,6 @@ public class StudentInfo {
       static void addStudent(String name, Date joiningDate, String phoneNumber, String batch){
           StudentInfo student = new StudentInfo(name, joiningDate, phoneNumber, batch);
           instance.add(student);
-          FeeRegister.addFeeEntry(student.ID, joiningDate, null, 0, false );
+          FeeRegister.addFeeEntry(student.ID, new MonthYear(joiningDate), null, 0, false );
       }
 }
