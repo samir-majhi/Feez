@@ -7,8 +7,8 @@ import java.util.Date;
  */
 
 public class StudentInfo {
-      static long lastGeneratedID = 0;
-      long ID;
+      static int lastGeneratedID = 0;
+      int ID;
       String name;
       Date joiningDate;
       String phoneNumber;
@@ -46,7 +46,7 @@ public class StudentInfo {
       // Might not be required since we currently don't expect student name to be huge.
       // Given that our customers are solopreneurs
 
-      static String getStudentNameByID (long ID){
+      static String getStudentNameByID (int ID){
           getInstance();
           for (StudentInfo student : instance){
               if (student.ID == ID) {

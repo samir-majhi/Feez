@@ -10,12 +10,12 @@ import java.util.Date;
  */
 
 public class FeeRegister {
-    static long lastGeneratedFeeID = 0;
-    long feeID;
-    long studentID;
+    static int lastGeneratedFeeID = 0;
+    int feeID;
+    int studentID;
     MonthYear forMonthYear;
     Date paymentDate;
-    long amount;
+    float amount;
     boolean isPaid;
 
     static ArrayList<FeeRegister> instance = new ArrayList<FeeRegister>();
@@ -24,7 +24,7 @@ public class FeeRegister {
     // monthList is Sorted from older to newer dates
     static ArrayList<MonthYear> monthList = new ArrayList<MonthYear>();
 
-    FeeRegister(long studentID, MonthYear forMonthYear, Date paymentDate, long amount, boolean isPaid){
+    FeeRegister(int studentID, MonthYear forMonthYear, Date paymentDate, float amount, boolean isPaid){
         lastGeneratedFeeID++;
         feeID = lastGeneratedFeeID;
         this.studentID = studentID;
@@ -54,10 +54,20 @@ public class FeeRegister {
         addFeeEntry(2, monthYear3, date3,300,true);
     }
 
-    static void addFeeEntry(long studentID, MonthYear forMonthYear, Date paymentDate, long amount, boolean isPaid){
+    static void addFeeEntry(int studentID, MonthYear forMonthYear, Date paymentDate, float amount, boolean isPaid){
         FeeRegister feeRegister = new FeeRegister(studentID, forMonthYear, paymentDate, amount, isPaid);
         instance.add(feeRegister);
         addToMonthList(forMonthYear);
+    }
+
+    static void updatePaymentStatus(int feeID, boolean isChecked, Date paymentDate){
+        getInstance();
+        for (FeeRegister feeEntry : instance){
+            if (feeEntry.feeID == feeID){
+                feeEntry.isPaid = isChecked;
+                    feeEntry.paymentDate = paymentDate;
+            }
+        }
     }
 
     private static void addToMonthList(MonthYear my){

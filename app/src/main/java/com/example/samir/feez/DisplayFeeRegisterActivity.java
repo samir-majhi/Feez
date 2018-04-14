@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -16,10 +17,15 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnItemSelectedListener{
+public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnItemSelectedListener, OnClickListener{
     static int count = 1;
+    private static final int paidCheckBoxBaseNumber = 1000000; // Int has a range of 2 billion or so
+    private static final int paymentDateTextViewBaseNumber = 2000000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,10 +93,16 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
         tableRow.setLayoutParams(tableParams);// TableLayout is the parent view
 
         TextView nameTitleTextView = new TextView(context);
-        nameTitleTextView.setTextSize(14);
         nameTitleTextView.setText("Name");
+        nameTitleTextView.setTextSize(14);
         nameTitleTextView.setLayoutParams(rowParams);// TableRow is the parent view
         tableRow.addView(nameTitleTextView);
+
+        TextView paymentDateTitleTextView = new TextView(context);
+        paymentDateTitleTextView.setText("Payment Date");
+        paymentDateTitleTextView.setTextSize(14);
+        paymentDateTitleTextView.setLayoutParams(rowParams);// TableRow is the parent view
+        tableRow.addView(paymentDateTitleTextView);
 
         TextView paidTitleTextView = new TextView(context);
         paidTitleTextView.setText("Paid");
@@ -116,10 +128,19 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
                 nameTextView.setLayoutParams(rowParams);// TableRow is the parent view
                 tableRow.addView(nameTextView);
 
+                TextView paymentDateTextView = new TextView(context);
+                paymentDateTextView.setTextSize(14);
+                setTextViewDate(paymentDateTextView, feeDetail.paymentDate);
+                paymentDateTextView.setId(paymentDateTextViewBaseNumber + feeDetail.feeID); // encoding info about kind of view as well as feeID into TextView
+                paymentDateTextView.setLayoutParams(rowParams);// TableRow is the parent view
+                tableRow.addView(paymentDateTextView);
+
                 CheckBox paidCheckBox = new CheckBox(context);
                 paidCheckBox.setTextSize(14);
                 paidCheckBox.setLayoutParams(rowParams);// TableRow is the parent view
                 paidCheckBox.setChecked(feeDetail.isPaid);
+                paidCheckBox.setId(paidCheckBoxBaseNumber + feeDetail.feeID);
+                paidCheckBox.setOnClickListener(this);
                 tableRow.addView(paidCheckBox);
 
                 feeTable.addView(tableRow);
@@ -127,7 +148,30 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
         }
 
     }
+    public void onClick (View v){
+        if (v instanceof CheckBox){
+            int feeID = v.getId() - paidCheckBoxBaseNumber;
+            boolean isChecked = ((CheckBox) v).isChecked();
 
-    // TODO: Implement Checkbox click behaviour
+            Date paymentDate = null;
+            if (isChecked){
+                paymentDate = new Date();
+            }
+            //update paymentDateTextView
+            TextView paymentDateTextView = (TextView) findViewById(paymentDateTextViewBaseNumber + feeID);
+            setTextViewDate(paymentDateTextView, paymentDate);
+
+            FeeRegister.updatePaymentStatus(feeID, isChecked, paymentDate);
+        }
+    }
+
+    private void setTextViewDate(TextView tv, Date date){
+        String paymentDate = "";
+        if (date != null){
+            String dateFormatToDisplay = "dd-MMM";
+            paymentDate = new SimpleDateFormat(dateFormatToDisplay).format(date);
+        }
+        tv.setText(paymentDate);
+    }
 }
 
