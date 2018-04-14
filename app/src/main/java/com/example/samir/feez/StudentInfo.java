@@ -37,8 +37,8 @@ public class StudentInfo {
           Date date1 = new Date(2017-1900, 1-1,1);
           Date date2 = new Date(2018-1900, 4-1,1);
           Date date3 = new Date(2018-1900, 3-1,1);
-          instance.add(new StudentInfo("Amit Jan 2017", date1, "1234567891","1"));
-          instance.add(new StudentInfo("Bindra March and Apr 2018", date2, "1234567892","2"));
+          instance.add(new StudentInfo("Amit", date1, "1234567891","1"));
+          instance.add(new StudentInfo("Bindra", date2, "1234567892","2"));
           instance.add(new StudentInfo("Cassandra", date3, "1234567893","3"));
       }
 

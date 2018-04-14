@@ -66,12 +66,13 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
 
     }
 
-    public void resetFeeTable(MonthYear forMonthYear){
+        public void resetFeeTable(MonthYear forMonthYear){
 
         TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams
                 (TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
         TableRow.LayoutParams rowParams = new TableRow.LayoutParams
                 (TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+        rowParams.rightMargin = DisplayHelper.dpToPixel(20, this);
 
         TableLayout feeTable = findViewById(R.id.FeeTable);
         TableLayout feeTableLayout = (TableLayout) feeTable;
@@ -175,3 +176,11 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
     }
 }
 
+class DisplayHelper{
+    private static Float scale;
+    public static int dpToPixel(int dp, Context context) {
+        if (scale == null)
+            scale = context.getResources().getDisplayMetrics().density;
+        return (int) ((float) dp * scale);
+    }
+}
