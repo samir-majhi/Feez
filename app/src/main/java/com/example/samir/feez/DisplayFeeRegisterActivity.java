@@ -2,6 +2,9 @@ package com.example.samir.feez;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -66,7 +69,8 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
 
     }
 
-        public void resetFeeTable(MonthYear forMonthYear){
+    public void resetFeeTable(MonthYear forMonthYear){
+        Resources res = getResources();
 
         TableLayout.LayoutParams tableParams = new TableLayout.LayoutParams
                 (TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT);
@@ -95,19 +99,22 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
 
         TextView nameTitleTextView = new TextView(context);
         nameTitleTextView.setText("Name");
-        nameTitleTextView.setTextSize(14);
+        nameTitleTextView.setTextSize(res.getDimension(R.dimen.regular_text_size));
+        //nameTitleTextView.setTypeface(nameTitleTextView.getTypeface(), Typeface.BOLD);
         nameTitleTextView.setLayoutParams(rowParams);// TableRow is the parent view
         tableRow.addView(nameTitleTextView);
 
         TextView paymentDateTitleTextView = new TextView(context);
         paymentDateTitleTextView.setText("Payment Date");
-        paymentDateTitleTextView.setTextSize(14);
+        paymentDateTitleTextView.setTextSize(res.getDimension(R.dimen.regular_text_size));
+        //paymentDateTitleTextView.setTypeface(paymentDateTitleTextView.getTypeface(), Typeface.BOLD);
         paymentDateTitleTextView.setLayoutParams(rowParams);// TableRow is the parent view
         tableRow.addView(paymentDateTitleTextView);
 
         TextView paidTitleTextView = new TextView(context);
         paidTitleTextView.setText("Paid");
-        paidTitleTextView.setTextSize(14);
+        paidTitleTextView.setTextSize(res.getDimension(R.dimen.regular_text_size));
+        //paidTitleTextView.setTypeface(paidTitleTextView.getTypeface(), Typeface.BOLD);
         paidTitleTextView.setLayoutParams(rowParams);// TableRow is the parent view
         tableRow.addView(paidTitleTextView);
 
@@ -123,21 +130,21 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
                 tableRow.setLayoutParams(tableParams);// TableLayout is the parent view
 
                 TextView nameTextView = new TextView(context);
-                nameTextView.setTextSize(14);
+                nameTextView.setTextSize(res.getDimension(R.dimen.regular_text_size));
                 String studentName = StudentInfo.getStudentNameByID(feeDetail.studentID);
                 nameTextView.setText(studentName);
                 nameTextView.setLayoutParams(rowParams);// TableRow is the parent view
                 tableRow.addView(nameTextView);
 
                 TextView paymentDateTextView = new TextView(context);
-                paymentDateTextView.setTextSize(14);
+                paymentDateTextView.setTextSize(res.getDimension(R.dimen.regular_text_size));
                 setTextViewDate(paymentDateTextView, feeDetail.paymentDate);
                 paymentDateTextView.setId(paymentDateTextViewBaseNumber + feeDetail.feeID); // encoding info about kind of view as well as feeID into TextView
                 paymentDateTextView.setLayoutParams(rowParams);// TableRow is the parent view
                 tableRow.addView(paymentDateTextView);
 
                 CheckBox paidCheckBox = new CheckBox(context);
-                paidCheckBox.setTextSize(14);
+                paidCheckBox.setTextSize(res.getDimension(R.dimen.regular_text_size));
                 paidCheckBox.setLayoutParams(rowParams);// TableRow is the parent view
                 paidCheckBox.setChecked(feeDetail.isPaid);
                 paidCheckBox.setId(paidCheckBoxBaseNumber + feeDetail.feeID);
@@ -149,6 +156,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
         }
 
     }
+
     public void onClick (View v){
         if (v instanceof CheckBox){
             int feeID = v.getId() - paidCheckBoxBaseNumber;

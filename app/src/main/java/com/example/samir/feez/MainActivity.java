@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTextMessage = (TextView) findViewById(R.id.button3);
 
-
-
-        mTextMessage = (TextView) findViewById(R.id.message);
+        // Skipping this summary page for now until I make it show paid/unpaid numbers/amounts.
+        sendMessage(mTextMessage);
         //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

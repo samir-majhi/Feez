@@ -10,14 +10,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <Spinner
             android:id="@+id/monthFilter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:textColor="#FFFFFF"/>
+            android:layout_width="135dp"
+            android:layout_height="71dp"
+            android:scrollbars="vertical"
+            android:textColor="#FFFFFF"
+            android:visibility="visible" />
 
         <TableLayout
             android:id="@+id/FeeTable"
@@ -80,9 +82,9 @@
             style="@android:style/Widget.Material.Light.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="openAddStudentActivity"
             android:text="+"
-            android:visibility="visible"
-            android:onClick="openAddStudentActivity"/>
+            android:visibility="visible" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
