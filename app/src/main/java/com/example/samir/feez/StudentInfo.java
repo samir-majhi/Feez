@@ -1,5 +1,7 @@
 package com.example.samir.feez;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Date;
 /**
@@ -25,12 +27,17 @@ public class StudentInfo {
             this.batch = batch;
       }
 
-      static ArrayList<StudentInfo> getInstance(){
+      static ArrayList<StudentInfo> getInstance(Context context){
             //TEMP stub for dummy data creation
             if (instance.isEmpty()) {
-                createDummyData();
+                //createDummyData();
+                StorageAccessor.readData(context, StorageAccessor.studentInfoData);
             }
             return instance;
+      }
+
+      static void setInstance(ArrayList<StudentInfo> object){
+          instance = object;
       }
 
       static void createDummyData(){
@@ -46,8 +53,8 @@ public class StudentInfo {
       // Might not be required since we currently don't expect student name to be huge.
       // Given that our customers are solopreneurs
 
-      static String getStudentNameByID (int ID){
-          getInstance();
+      static String getStudentNameByID (Context context, int ID){
+          getInstance(context);
           for (StudentInfo student : instance){
               if (student.ID == ID) {
                   return student.name;
@@ -56,9 +63,10 @@ public class StudentInfo {
           return null;
       }
 
-      static void addStudent(String name, Date joiningDate, String phoneNumber, String batch){
+      static void addStudent(Context context, String name, Date joiningDate, String phoneNumber, String batch){
           StudentInfo student = new StudentInfo(name, joiningDate, phoneNumber, batch);
           instance.add(student);
-          FeeRegister.addFeeEntry(student.ID, new MonthYear(joiningDate), null, 0, false );
+          StorageAccessor.writeData(context, StorageAccessor.studentInfoData);
+          FeeRegister.addFeeEntry(context, student.ID, new MonthYear(joiningDate), null, 0, false );
       }
 }

@@ -44,7 +44,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
 
         // Month filter Drop down
         Spinner monthFilter = (Spinner) findViewById(R.id.monthFilter);
-        String[] monthList = FeeRegister.getMonthList();
+        String[] monthList = FeeRegister.getMonthList(this);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, monthList );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         monthFilter.setAdapter(adapter);
@@ -121,7 +121,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
         feeTable.addView(tableRow);
 
         // Name and Paid rows
-        ArrayList<FeeRegister> feeRegister = FeeRegister.getInstance();
+        ArrayList<FeeRegister> feeRegister = FeeRegister.getInstance(this);
         for (FeeRegister feeDetail : feeRegister){
 
             if (feeDetail.forMonthYear.equals(forMonthYear)) {
@@ -131,7 +131,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
 
                 TextView nameTextView = new TextView(context);
                 nameTextView.setTextSize(res.getDimension(R.dimen.regular_text_size));
-                String studentName = StudentInfo.getStudentNameByID(feeDetail.studentID);
+                String studentName = StudentInfo.getStudentNameByID(this, feeDetail.studentID);
                 nameTextView.setText(studentName);
                 nameTextView.setLayoutParams(rowParams);// TableRow is the parent view
                 tableRow.addView(nameTextView);
@@ -170,7 +170,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
             TextView paymentDateTextView = (TextView) findViewById(paymentDateTextViewBaseNumber + feeID);
             setTextViewDate(paymentDateTextView, paymentDate);
 
-            FeeRegister.updatePaymentStatus(feeID, isChecked, paymentDate);
+            FeeRegister.updatePaymentStatus(this, feeID, isChecked, paymentDate);
         }
     }
 

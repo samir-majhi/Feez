@@ -1,5 +1,6 @@
 package com.example.samir.feez;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -44,7 +45,7 @@ public class AddStudentActivity extends AppCompatActivity {
         EditText BatchEntry = (EditText) findViewById(R.id.BatchEntry);
         String batch = BatchEntry.getText().toString();
 
-        StudentInfo.addStudent(name, joiningDate, phoneNumber, batch);
+        StudentInfo.addStudent(getApplicationContext(), name, joiningDate, phoneNumber, batch);
         finish();
     }
 
