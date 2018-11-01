@@ -3,8 +3,6 @@ package com.example.samir.feez;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -44,7 +42,7 @@ public class DisplayFeeRegisterActivity extends AppCompatActivity implements OnI
 
         // Month filter Drop down
         Spinner monthFilter = (Spinner) findViewById(R.id.monthFilter);
-        String[] monthList = FeeRegister.getMonthList(this);
+        String[] monthList = FeeRegister.getMonthListPretty(this);
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, monthList );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         monthFilter.setAdapter(adapter);

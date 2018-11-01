@@ -96,7 +96,7 @@ public class FeeRegister {
         }
     }
 
-    static String[] getMonthList(Context context){
+    static String[] getMonthListPretty(Context context){
         getInstance(context); // to ensure dummydata is created
         ArrayList<String> monthListString = new ArrayList<String>();
         for (MonthYear my : monthList){
@@ -105,6 +105,10 @@ public class FeeRegister {
         return monthListString.toArray(new String[0]);
     }
 
+    static ArrayList<MonthYear> getMonthList(Context context){
+        getInstance(context); // to ensure dummydata is created
+        return monthList;
+    }
     static void setMonthList(ArrayList<MonthYear> object){
         monthList = object;
     }

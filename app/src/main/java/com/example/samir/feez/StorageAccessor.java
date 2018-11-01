@@ -1,6 +1,7 @@
 package com.example.samir.feez;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -53,7 +54,8 @@ public class StorageAccessor{
             }
 
         } catch (Exception e) {
-            Alert.show(context,"Couldn't read stored data: "+ fileName +": "+ e.toString());
+            //Alert.show(context,"Couldn't read stored data: "+ fileName +": "+ e.toString());
+            Log.e("StorageAccessor:readDataEach", "Couldn't write stored data: "+ fileName +": "+ e.toString());
             e.printStackTrace();
 
         }
@@ -84,7 +86,8 @@ public class StorageAccessor{
             os.close();
         }
         catch (Exception e) {
-            Alert.show(context,"Couldn't write stored data: "+ fileName +": "+ e.toString());
+            //Alert.show(context,"Couldn't write stored data: "+ fileName +": "+ e.toString());
+            Log.e("StorageAccessor:rriteDataEach", "Couldn't write stored data: "+ fileName +": "+ e.toString());
             e.printStackTrace();
         }
     }
