@@ -45,7 +45,7 @@ public class AddStudentActivity extends AppCompatActivity {
         EditText BatchEntry = (EditText) findViewById(R.id.BatchEntry);
         String batch = BatchEntry.getText().toString();
 
-        StudentInfo.addStudent(getApplicationContext(), name, joiningDate, phoneNumber, batch);
+        StudentInfoAccessor.addStudent(getApplicationContext(), name, joiningDate, phoneNumber, batch);
         finish();
     }
 
